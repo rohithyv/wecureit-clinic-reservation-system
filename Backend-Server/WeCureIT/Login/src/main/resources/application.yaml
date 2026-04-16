@@ -8,14 +8,12 @@ spring:
   config:
     import: optional:file:.env[.properties]
 
-  # PostgreSQL
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
-  # Default auto table generation
   jpa:
     hibernate:
       ddl-auto: update
@@ -25,7 +23,6 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         default_schema: wecureit
 
-  # Redis
   data:
     redis:
       host: ${REDIS_HOST:localhost}

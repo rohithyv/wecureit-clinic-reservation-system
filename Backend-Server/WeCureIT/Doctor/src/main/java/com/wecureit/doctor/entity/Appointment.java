@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "appointments", schema = "wecureit")
@@ -15,6 +17,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Appointment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,8 +50,15 @@ public class Appointment {
     private OffsetDateTime actualEndTime;
 
     private String status = "CONFIRMED";
-    private BigDecimal baseAmount = BigDecimal.ZERO;
-    private BigDecimal penaltyFee = BigDecimal.ZERO;
-    private BigDecimal overageFee = BigDecimal.ZERO;
+
+    // Financial tracking
+    private BigDecimal baseAmount  = BigDecimal.ZERO;
+    private BigDecimal penaltyFee  = BigDecimal.ZERO;
+    private BigDecimal overageFee  = BigDecimal.ZERO;
+
     private OffsetDateTime cancelledAt;
+
+    // Clinical notes linked to this appointment
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AppointmentNote> notes = new ArrayList<>();
 }

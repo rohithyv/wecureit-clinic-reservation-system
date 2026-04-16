@@ -5,7 +5,7 @@ import com.wecureit.admin.model.OnboardDoctorRequest;
 import com.wecureit.admin.model.OnboardFacilityRequest;
 import com.wecureit.admin.repository.*;
 import com.wecureit.login.entity.User;
-import com.wecureit.login.entity.UserRole;
+//import com.wecureit.login.entity.UserRole;
 import com.wecureit.login.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +38,8 @@ public class AdminService {
             user.setMobileNumber(request.getMobileNumber());
             user.setFirstName(request.getFirstName());
             user.setLastName(request.getLastName());
-            user.setRole(UserRole.valueOf("DOCTOR"));
+            //user.setRole(UserRole.valueOf("DOCTOR"));
+            user.setRole("DOCTOR");
             var rawPass = UUID.randomUUID().toString().substring(0, 8);
             user.setPassword(passwordEncoder.encode(rawPass));
             User savedUser = userRepo.save(user);
