@@ -6,6 +6,7 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class ChamberRequest {
     private Long facilityId;
+    private Integer dayOfCycle;
     private Long roomId;
     private String slotStart;
     private String slotEnd;

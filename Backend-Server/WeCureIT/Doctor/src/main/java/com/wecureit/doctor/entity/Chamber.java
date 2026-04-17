@@ -31,6 +31,9 @@ public class Chamber {
 
     @Column(name = "slot_duration_minutes")
     private Integer slotDurationMinutes;
+    
+    @Column(name = "day_of_cycle")
+    private Integer dayOfCycle;
 
     @Column(name = "consultation_charge")
     private Double consultationCharge;

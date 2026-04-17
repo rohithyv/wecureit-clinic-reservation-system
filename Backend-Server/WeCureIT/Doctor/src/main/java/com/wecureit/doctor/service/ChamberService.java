@@ -22,27 +22,28 @@ public class ChamberService {
 
     public List<ChamberResponse> getMyChambers(String sessionKey) {
         SessionData session = sessionService.getSession(sessionKey);
-        Doctor doctor = doctorRepo.findByUserId(session.getUserId())
-                .orElseThrow(() -> new RuntimeException("Doctor not found"));
+        Doctor doctor = doctorRepo.findById(Long.parseLong(session.getId()))
+        .orElseThrow(() -> new RuntimeException("Doctor not found"));
         return chamberRepo.findByDoctorId(doctor.getId())
                 .stream().map(this::toResponse).collect(Collectors.toList());
     }
 
     public ChamberResponse addChamber(String sessionKey, ChamberRequest req) {
-        SessionData session = sessionService.getSession(sessionKey);
-        Doctor doctor = doctorRepo.findByUserId(session.getUserId())
-                .orElseThrow(() -> new RuntimeException("Doctor not found"));
-        Chamber chamber = new Chamber();
-        chamber.setDoctor(doctor);
-        chamber.setFacilityId(req.getFacilityId());
-        chamber.setRoomId(req.getRoomId());
-        chamber.setSlotStart(req.getSlotStart());
-        chamber.setSlotEnd(req.getSlotEnd());
-        chamber.setSlotDurationMinutes(req.getSlotDurationMinutes());
-        chamber.setConsultationCharge(req.getConsultationCharge());
-        chamber.setAvailableDays(req.getAvailableDays());
-        return toResponse(chamberRepo.save(chamber));
-    }
+    SessionData session = sessionService.getSession(sessionKey);
+    Doctor doctor = doctorRepo.findById(Long.parseLong(session.getId()))
+            .orElseThrow(() -> new RuntimeException("Doctor not found"));
+    Chamber chamber = new Chamber();
+    chamber.setDoctor(doctor);
+    chamber.setFacilityId(req.getFacilityId());
+    chamber.setRoomId(req.getRoomId());
+    chamber.setSlotStart(req.getSlotStart());
+    chamber.setSlotEnd(req.getSlotEnd());
+    chamber.setSlotDurationMinutes(req.getSlotDurationMinutes());
+    chamber.setConsultationCharge(req.getConsultationCharge());
+    chamber.setAvailableDays(req.getAvailableDays());
+    chamber.setDayOfCycle(req.getDayOfCycle());
+    return toResponse(chamberRepo.save(chamber));
+}
 
     public ChamberResponse updateChamber(String sessionKey, Long chamberId, ChamberRequest req) {
         Chamber chamber = chamberRepo.findById(chamberId)
