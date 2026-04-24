@@ -7,3 +7,7 @@ dist/
 .idea/
 cookies.txt
 cookies2.txt
+.env
+.vscode/
+dump.rdb
+cookies*.txt

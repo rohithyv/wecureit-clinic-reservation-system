@@ -1,29 +1,24 @@
 package com.wecureit.doctor.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Entity
-@Table(name = "doctor_speciality_licenses", schema = "wecureit")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "doctor_specialty_licenses", schema = "wecureit")
 public class DoctorSpecialityLicense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    @Column(name = "doctor_id", nullable = false)
+    private Long doctorId;
 
-    @Column(name = "state_code", length = 2, nullable = false)
+    @Column(name = "state_code", length = 10)
     private String stateCode;
 
-    @Column(nullable = false)
+    @Column(length = 100)
     private String specialty;
 }

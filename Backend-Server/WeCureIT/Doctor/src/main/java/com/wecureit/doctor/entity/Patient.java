@@ -1,32 +1,42 @@
 package com.wecureit.doctor.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Entity
-@Table(name = "patients", schema = "wecureit")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "patients", schema = "wecureit")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "preferred_location")
     private String preferredLocation;
+
+    @Column(name = "cardholder_name", length = 255)
     private String cardholderName;
+
+    @Column(name = "credit_card_number", length = 20)
     private String creditCardNumber;
-    @Column(name = "card_last_four", length = 4)
-    private String cardLastFourDigits;
+
+    @Column(name = "expiration_date", length = 7)
     private String expirationDate;
+
+    @Column(length = 4)
     private String cvv;
+
+    @Column(name = "billing_zip", length = 10)
     private String billingZip;
+
+    @Column(name = "card_last_four", length = 4)
+    private String cardLastFour;
 }

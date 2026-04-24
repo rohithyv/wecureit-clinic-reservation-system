@@ -1,9 +1,6 @@
 package com.wecureit.doctor.model.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import java.util.List;
 
 @Getter
@@ -11,6 +8,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Specialization {
-    private String name;
-    private List<String> licensedStates;
+    private String specialty;
+    private List<String> states;
 }

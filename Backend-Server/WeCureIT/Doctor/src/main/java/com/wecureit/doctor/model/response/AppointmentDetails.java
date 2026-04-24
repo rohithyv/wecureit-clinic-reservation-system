@@ -1,10 +1,6 @@
 package com.wecureit.doctor.model.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,15 +10,14 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppointmentDetails {
-    private Long appointmentId;
+    private Long id;
     private String patientName;
     private String facilityName;
     private String roomNumber;
     private LocalDate visitDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private LocalTime scheduledStartTime;
+    private LocalTime scheduledEndTime;
     private String status;
-    // Financial fields
     private BigDecimal baseAmount;
     private BigDecimal penaltyFee;
     private BigDecimal overageFee;
