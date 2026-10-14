@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:cdex;DB_CLOSE_DELAY=-1}
+    username: ${DB_USER:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update # demo only; use versioned migrations for production
+    open-in-view: false
+  h2:
+    console:
+      enabled: false
+demo:
+  payer-password: ${PAYER_PASSWORD:change-me-payer}
+  provider-password: ${PROVIDER_PASSWORD:change-me-provider}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
